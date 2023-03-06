@@ -1,0 +1,30 @@
+{
+  "name": "grpc-task",
+  "version": "1.0.0",
+  "description": "As a test task for [Klaus](https://www.klausapp.com) software engineering position we ask our candidates to build a small [gRPC](https://grpc.io) service using language of their choice. Prefered language for new services in Klaus is [Go](https://golang.org).",
+  "main": "index.js",
+  "scripts": {
+    "build": "proto-loader-gen-types  --grpcLib=@grpc/grpc-js --outDir=proto/ proto/*.proto",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "nodemon ./src/server.ts",
+    "start:client": "nodemon ./src/client.ts"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaraldAstok/gRPC-task.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HaraldAstok/gRPC-task/issues"
+  },
+  "homepage": "https://github.com/HaraldAstok/gRPC-task#readme",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.8.11",
+    "@grpc/proto-loader": "^0.7.5",
+    "nodemon": "^2.0.21",
+    "ts-node": "^10.9.1",
+    "typescript": "4.3.2"
+  }
+}
