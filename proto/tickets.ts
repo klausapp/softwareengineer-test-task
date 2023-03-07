@@ -8,7 +8,15 @@ type SubtypeConstructor<Constructor extends new (...args: any) => any, Subtype> 
 };
 
 export interface ProtoGrpcType {
+  google: {
+    protobuf: {
+      Timestamp: MessageTypeDefinition
+    }
+  }
   ticketsPackage: {
+    AgregatedResponse: MessageTypeDefinition
+    AgregatedResponses: MessageTypeDefinition
+    DateRequest: MessageTypeDefinition
     PingRequest: MessageTypeDefinition
     PingResponse: MessageTypeDefinition
     Tickets: SubtypeConstructor<typeof grpc.Client, _ticketsPackage_TicketsClient> & { service: _ticketsPackage_TicketsDefinition }

@@ -3,6 +3,8 @@ import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import { ProtoGrpcType } from '../proto/tickets';
 import { TicketsHandlers } from '../proto/ticketsPackage/Tickets';
+import { AgregatedResponses } from '../proto/ticketsPackage/AgregatedResponses';
+import {initDbConn, getAgregatedResults} from './db/database'
 
 const PORT = 8082;
 
@@ -16,7 +18,9 @@ const grpcObject = grpc.loadPackageDefinition(
 
 const ticketPackage = grpcObject.ticketsPackage;
 
+
 function main() {
+    initDbConn();
 	const server = getServer();
 
 	server.bindAsync(
@@ -24,14 +28,16 @@ function main() {
 		grpc.ServerCredentials.createInsecure(),
 		(err, port) => {
 			if (err) {
-				console.log(err);
+				console.log('ERROR ->', err);
 				return;
 			}
-			console.log(`Your server as started on port ${port}`);
+			console.log(`Your server started on port ${port}`);
 			server.start();
 		}
 	);
 }
+
+const resultsArray: AgregatedResponses = {results:[]}
 
 function getServer() {
 	const server = new grpc.Server();
@@ -40,6 +46,15 @@ function getServer() {
 			console.log('GetServer', req.request);
             res(null, {message:'PONG'})
 		},
+        AgregatedScores: async (req, res) => {
+
+            const {start = 0, end = 0} = req.request;
+            console.log('PARAMS ->', {start, end})
+            const rows = await getAgregatedResults(start, end);
+
+            console.log('ROWS ->', rows)
+            res(null, {results: resultsArray.results})
+        }
 	} as TicketsHandlers);
 
 	return server;

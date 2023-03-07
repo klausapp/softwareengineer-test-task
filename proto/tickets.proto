@@ -1,9 +1,10 @@
 syntax = "proto3";
+import "google/protobuf/timestamp.proto";
 
 package ticketsPackage;
-
 service Tickets {
     rpc PingPong(PingRequest) returns (PingResponse) {};
+    rpc AgregatedScores( DateRequest) returns ( AgregatedResponses) {}
 }
 
 message PingRequest {
@@ -12,4 +13,22 @@ message PingRequest {
 
 message PingResponse {
     string message = 1;
+}
+
+message DateRequest {
+    google.protobuf.Timestamp start = 1;
+    google.protobuf.Timestamp end = 2;
+}
+
+message AgregatedResponses {
+    repeated AgregatedResponse results = 1;
+}
+// message AgregatedResponses {
+//     repeated string results = 1;
+// }
+message AgregatedResponse {
+    string category = 1;
+    int32 ratings = 2;
+    string date = 3;
+    int32 score = 4;
 }

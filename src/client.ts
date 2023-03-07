@@ -35,4 +35,14 @@ function onClientReady() {
 		}
 		console.log(result);
 	});
+	client.AgregatedScores(
+		{ start: { seconds: '1646627042' }, end: { seconds: '1678163042' } },
+		(err, result) => {
+			if (err) {
+				console.error(err);
+				return;
+			}
+			console.log(result);
+		}
+	);
 }

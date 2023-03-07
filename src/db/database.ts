@@ -1,24 +1,19 @@
-import { Database, OPEN_READWRITE } from 'sqlite3';
+import * as knex from 'knex';
 
-let db = new Database('./database.db', OPEN_READWRITE, (err) => {
-	if (err) {
-		console.error('DB ERROR:', err);
-	}
-	console.log('Connected to db');
-});
+let db: knex.Knex;
 
-db.serialize(() => {
-	db.each(`SELECT * FROM rating_categories`, (err, row) => {
-		if (err) {
-			console.error('DB READ ERROR:', err);
-		}
-		console.log('ROW DATA :', row.id + '\t' + row.name);
+export function initDbConn(): void {
+	db = knex.knex({
+		client: 'sqlite3',
+		connection: {
+			filename: './database.db',
+		},
+		useNullAsDefault: true,
 	});
-});
+}
 
-db.close((err) => {
-	if (err) {
-		console.error(err.message);
-	}
-	console.log('Close the database connection.');
-});
+export async function getAgregatedResults(start: any, end: any): Promise<void> {
+	return db.raw('SELECT * FROM rating_categories');
+}
+
+module.exports = { initDbConn, getAgregatedResults };
