@@ -1,6 +1,6 @@
 # Software Engineer Test Task
 
-As a test task for [Klaus](https://www.klausapp.com) software engineering position we ask our candidates to build a small [gRPC](https://grpc.io) service using language of their choice. Prefered language for new services in Klaus is [Go](https://golang.org).
+As a test task for [Klaus](https://www.klausapp.com) software engineering position we ask our candidates to build a small [gRPC](https://grpc.io) service using language of their choice. Preferred language for new services in Klaus is [Go](https://golang.org).
 
 The service should be using provided sample data from SQLite database (`database.db`).
 
@@ -18,7 +18,7 @@ Please fork this repository and share the link to your solution with us.
 
         For periods longer than one month weekly aggregates should be returned instead of daily values.
 
-        From the reponse the following UI representation should be possible:
+        From the response the following UI representation should be possible:
 
         | Category | Ratings | Date 1 | Date 2 | ... | Score |
         |----|----|----|----|----|----|
@@ -37,7 +37,7 @@ Please fork this repository and share the link to your solution with us.
         | 1   |  100%  |  30%  |
         | 2   |  30%  |  80%  |
 
-    * **Overal quality score**
+    * **Overall quality score**
 
         What is the overall aggregate score for a period.
 
